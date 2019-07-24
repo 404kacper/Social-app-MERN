@@ -7,6 +7,7 @@ const { check, validationResult } = require('express-validator');
 
 const Profile = require('../../models/Profile');
 const User = require('../../models/User');
+const Post = require('../../models/Post');
 
 // @route   GET api/profile/me
 // @desc    Get current users profile
@@ -152,8 +153,8 @@ router.get('/user/:user_id', async (req, res) => {
 // @access  Private
 router.delete('/', auth, async (req, res) => {
   try {
-    // @todo - remove users posts
-
+    // Remove user posts
+    await Post.deleteMany({ user: req.user.id });
     // Remove profile
     await Profile.findOneAndRemove({
       user: req.user.id
@@ -354,18 +355,18 @@ router.get('/github/:username', (req, res) => {
         'githubClientId'
       )}&client_secret=${config.get('githubSecret')}`,
       method: 'GET',
-      headers: { 'user-agent': 'node.js'}
+      headers: { 'user-agent': 'node.js' }
     };
 
     request(options, (error, response, body) => {
-      if(error) console.error(error);
+      if (error) console.error(error);
 
-      if(response.statusCode !== 200) {
-        return res.status(404).json({msg: 'No Github profile found'});
+      if (response.statusCode !== 200) {
+        return res.status(404).json({ msg: 'No Github profile found' });
       }
 
       res.json(JSON.parse(body));
-    })
+    });
   } catch (error) {
     console.error(error.message);
     res.status(500).send('Server Error');
