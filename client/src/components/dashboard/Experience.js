@@ -18,7 +18,12 @@ const Experience = ({ experience, deleteExperience }) => {
         )}
       </td>
       <td>
-        <button className='btn btn-danger' onClick={() => deleteExperience(exp._id)}>Delete</button>
+        <button
+          className='btn btn-danger'
+          onClick={() => deleteExperience(exp._id)}
+        >
+          Delete
+        </button>
       </td>
     </tr>
   ));
@@ -31,6 +36,7 @@ const Experience = ({ experience, deleteExperience }) => {
             <th>Company</th>
             <th className='hide-sm'>Title</th>
             <th className='hide-sm'>Years</th>
+            <th />
           </tr>
         </thead>
         <tbody>{experiences}</tbody>
@@ -41,7 +47,10 @@ const Experience = ({ experience, deleteExperience }) => {
 
 Experience.propTypes = {
   experience: PropTypes.array.isRequired,
-  deleteExperience: PropTypes.func.isRequired,
+  deleteExperience: PropTypes.func.isRequired
 };
 
-export default connect(null, {deleteExperience})(Experience);
+export default connect(
+  null,
+  { deleteExperience }
+)(Experience);
