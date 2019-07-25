@@ -1,0 +1,6 @@
+{
+  "mongoURI": "mongodb+srv://kacper123:kacper123@initial-cluster-7kxo6.mongodb.net/test?retryWrites=true&w=majority",
+  "jwtSecret": "asecrettoken",
+  "githubClientId": "498b15965d74f3067435",
+  "githubSecret": "6560d93ad7bd5aab379e560ac9bdb5493a4594cd"
+}
